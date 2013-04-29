@@ -118,10 +118,17 @@ Check iptables logs.
 * One could play with the route command.
 * Much safer would be, if one would build something similar to [Whonix](https://github.com/adrelanos/Whonix). Very briefly, while Whonix uses Tor and consists of a Gateway and a Workstation, since the Workstation doesn't know it's own external IP, the Workstation can never leak it and never connect in the clear. One could create similarly a VPNBOX.
 
+# Forks, Patches, Testers, Comments, etc.
+
+Welcome.
+
 # Author
 
 * e-mail: adrelanos at riseup dot net
 * twitter: https://twitter.com/Whonix
+* BTC / donate:
+
+    1JgzCCSox56Sh4NnQJqRiwoxKi8oVSZBEd
 
 # License
 
