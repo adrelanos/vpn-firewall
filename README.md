@@ -18,10 +18,20 @@ manipulate the firewall rules.
 * Run the VPN software as unprivileged user. For OpenVPN see
 [OpenVPN wiki UnprivilegedUser](https://community.openvpn.net/openvpn/wiki/
 UnprivilegedUser).
+* Configure (Open)VPN.
+* Autostart (Open)VPN.
 
 # How to Use
 
-TODO
+    cd ~
+
+    git clone https://github.com/adrelanos/VPN-Firewall.git
+    
+    cd VPN-Firewall
+    
+    sudo cp ./usr/local/bin/vpnfirewall /usr/local/bin/
+
+Load /usr/local/bin/vpnfirewall before the network and before OpenVPN goes up.
 
 # How to Test
 
@@ -33,13 +43,23 @@ TODO
 
 Example OpenVPN:
 
-  sudo killall openvpn
+    sudo killall openvpn
     
 4) Check if you can still connect to whatismyipaddress.com.
 
 If yes, bad, something is wrong.
 
 If no, good, you won't connect to any remote servers besides the VPN IP once the VPN client broke down.
+
+# How to Debug
+
+Developers only.
+
+Enable debugging. Uncomment "set -x" in all scripts.
+
+Check iptables logs.
+
+    tail -f /var/log/syslog
 
 # Alternatives
 
