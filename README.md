@@ -1,3 +1,8 @@
+# Why
+If you simply add a VPN using common instructions, it generally fails open. That means, if the VPN breaks down, because the connection is interrupted, traffic will be send without the VPN.
+
+It's much safer when it fails closed, i.e. when the VPN connection breaks down, the whole internet connection must be down as long as the VPN connection isn't restored.
+
 # What does it do
 
 * Forbid outgoing traffic after the VPN software broke down for some reason.
@@ -83,6 +88,7 @@ Check iptables logs.
 
 # Alternatives
 
+* There are some weak alternative ways to do this. Some "VPN-Monitor" check every, let's say 500 ms, if the VPN IP is still valid, if not, kill a list of applications. This is not very secure, it's a game if that time period is sufficient to stop a leak and if killing the applications is fast enough.
 * One could play with the route command.
 * Much safer would be, if one would build something similar to [Whonix](https://github.com/adrelanos/Whonix). Very briefly, while Whonix uses Tor and consists of a Gateway and a Workstation, since the Workstation doesn't know it's own external IP, the Workstation can never leak it and never connect in the clear. One could create similarly a VPNBOX.
 
