@@ -125,8 +125,11 @@ Welcome.
 # Author
 
 * e-mail: adrelanos at riseup dot net
+* [Homepage / OpenPGP](https://github.com/adrelanos/Whonix/blob/master/adrelanos.mediawiki)
 * twitter: https://twitter.com/Whonix
-* BTC / donate:
+* Donate
+
+BTC
 
     1JgzCCSox56Sh4NnQJqRiwoxKi8oVSZBEd
 
