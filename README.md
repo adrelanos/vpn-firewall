@@ -56,7 +56,33 @@ Should reply:
 
 * If you are permanently using (Open)VPN, i.e. always want to use the VPN.
 
-I am working on an init script.
+Install the init script.
+
+    sudo cp ./etc/init.d/vpnfirewall /etc/init.d/
+
+    sudo update-rc.d vpnfirewall defaults
+    
+Test the init script.    
+    
+    sudo service vpnfirewall restart
+    
+    sudo service vpnfirewall status
+
+    echo $?
+
+Should reply:
+
+    0
+
+Reboot.
+
+Check VPN Firewall status again.
+
+    sudo service vpnfirewall status
+    
+Should reply:
+
+    0
 
 # How to Test
 
