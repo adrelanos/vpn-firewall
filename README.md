@@ -23,8 +23,10 @@ manipulate the firewall rules.
 * Run the VPN software as unprivileged user. For OpenVPN see
 [OpenVPN wiki UnprivilegedUser](https://community.openvpn.net/openvpn/wiki/
 UnprivilegedUser).
+* Install (Open)VPN.
 * Configure (Open)VPN.
 * Autostart (Open)VPN.
+* Anything else not mentoined above in "What does it do".
 
 # How to Use
 1) Get the firewall script and install it.
