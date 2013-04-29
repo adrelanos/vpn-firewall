@@ -22,6 +22,7 @@ UnprivilegedUser).
 * Autostart (Open)VPN.
 
 # How to Use
+1) Get the firewall script and install it.
 
     cd ~
 
@@ -30,8 +31,27 @@ UnprivilegedUser).
     cd VPN-Firewall
     
     sudo cp ./usr/local/bin/vpnfirewall /usr/local/bin/
+    
+2) Edit the /usr/local/bin/vpnfirewall settings with your favorite editor. 
 
-Load /usr/local/bin/vpnfirewall before the network and before OpenVPN goes up.
+3) Load /usr/local/bin/vpnfirewall before the network and before OpenVPN goes up.
+
+* If you are NOT permanently using (Open)VPN, i.e. if you only occasionally, manually connect to the VPN.
+
+Just run the following command before starting OpenVPN.
+
+    sudo /usr/local/bin/vpnfirewall
+
+Should reply:
+
+    OK: Loading VPN firewall...
+    OK: The firewall should not show any messages,
+    OK: besides output beginning with prefix OK:...
+    OK: VPN firewall loaded.
+
+* If you are permanently using (Open)VPN, i.e. always want to use the VPN.
+
+I am working on an init script.
 
 # How to Test
 
@@ -64,7 +84,7 @@ Check iptables logs.
 # Alternatives
 
 * One could play with the route command.
-* Much safer would be, if one would build something similar to [Whonix](https://github.com/adrelanos/Whonix). Very briefly, while Whonix uses Tor and consists of a Gateway and a Workstation, since the Workstation doesn't know it's own external IP, the Workstation can never leak it and never connect in the clear. One could create similary a VPNBOX.
+* Much safer would be, if one would build something similar to [Whonix](https://github.com/adrelanos/Whonix). Very briefly, while Whonix uses Tor and consists of a Gateway and a Workstation, since the Workstation doesn't know it's own external IP, the Workstation can never leak it and never connect in the clear. One could create similarly a VPNBOX.
 
 # Author
 
