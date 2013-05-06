@@ -1,0 +1,14 @@
+Source: vpnfirewall
+Section: net
+Priority: extra
+Maintainer: adrelanos <adrelanos at riseup dot net>
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.9.4
+Homepage: https://github.com/adrelanos/VPN-Firewall
+
+Package: vpnfirewall
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, iptables
+Description: VPN-Firewall
+ Leak Protection (Fail Safe Mechanism) for (Open)VPN 
+ 
