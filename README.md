@@ -40,17 +40,17 @@ UnprivilegedUser).
     
     cd VPN-Firewall
     
-    sudo cp ./usr/local/bin/vpnfirewall /usr/local/bin/
+    sudo cp ./usr/bin/vpnfirewall /usr/bin/
     
-2) Edit the /usr/local/bin/vpnfirewall settings with your favorite editor. 
+2) Edit the /usr/bin/vpnfirewall settings with your favorite editor. 
 
-3) Load /usr/local/bin/vpnfirewall before the network and before OpenVPN goes up.
+3) Load /usr/bin/vpnfirewall before the network and before OpenVPN goes up.
 
 * If you are NOT permanently using (Open)VPN, i.e. if you only occasionally, manually connect to the VPN.
 
 Just run the following command before starting OpenVPN.
 
-    sudo /usr/local/bin/vpnfirewall
+    sudo /usr/bin/vpnfirewall
 
 Should reply:
 
