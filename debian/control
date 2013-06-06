@@ -1,10 +1,12 @@
 Source: vpnfirewall
 Section: net
 Priority: extra
-Maintainer: adrelanos <adrelanos at riseup dot net>
+Maintainer: adrelanos <adrelanos@riseup.net>
 Build-Depends: debhelper (>= 7.0.50~)
 Standards-Version: 3.9.4
 Homepage: https://github.com/adrelanos/VPN-Firewall
+Vcs-Git: https://github.com/adrelanos/Whonix.git
+Vcs-Browser: https://github.com/adrelanos/Whonix.git
 
 Package: vpnfirewall
 Architecture: all
