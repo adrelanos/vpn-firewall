@@ -22,6 +22,7 @@ IP and sends it somewhere though the VPN.
 * Defend against adversaries, which are in position to run code locally, i.e.
 manipulate the firewall rules.
 * Prevent any other kind trickery to circumvent using the VPN.
+* Prevent leaks caused by bugs in the VPN software.
 * Run the VPN software as unprivileged user. For OpenVPN see
 [OpenVPN wiki UnprivilegedUser](https://community.openvpn.net/openvpn/wiki/
 UnprivilegedUser).
