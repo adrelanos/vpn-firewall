@@ -30,10 +30,21 @@ UnprivilegedUser).
 * Install (Open)VPN.
 * Configure (Open)VPN.
 * Autostart (Open)VPN.
-* Anything else not mentoined above in "What does it do".
+* Anything else not mentioned above in "What does it do".
 
 # How to Use
-1) Get the firewall script and install it.
+1) First learn how to get your VPN software connected without using VPN-Firewall.
+
+Use the IP to connect to your VPN server, not the hostname!
+
+2) Remove old versions of VPN-Firewall.
+
+    sudo update-rc.d vpnfirewall remove
+    sudo rm /usr/local/bin/vpnfirewall
+    sudo rm /usr/bin/vpnfirewall
+    sudo rm /etc/init.d/vpnfirewall
+
+3) Get the firewall script and install it.
 
     cd ~
 
@@ -43,9 +54,11 @@ UnprivilegedUser).
     
     sudo cp ./usr/bin/vpnfirewall /usr/bin/
     
-2) Edit the /usr/bin/vpnfirewall settings with your favorite editor. 
+4) Edit the /usr/bin/vpnfirewall settings with your favorite editor.
 
-3) Load /usr/bin/vpnfirewall before the network and before OpenVPN goes up.
+Note, that you must use the IP of your VPN server, not the hostname.
+
+5) Load /usr/bin/vpnfirewall before the network and before OpenVPN goes up.
 
 * If you are NOT permanently using (Open)VPN, i.e. if you only occasionally, manually connect to the VPN.
 
