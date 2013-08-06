@@ -17,7 +17,7 @@
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Ensures no traffic is send, once OpenVPN breaks down for some reason."
 NAME=vpnfirewall
-DAEMON=/usr/local/bin/$NAME
+DAEMON=/usr/bin/$NAME
 #DAEMON_ARGS="--options args"
 PIDFILE=/var/run/$NAME/pid
 SCRIPTNAME=/etc/init.d/$NAME
