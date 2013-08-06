@@ -52,7 +52,7 @@ Use the IP to connect to your VPN server, not the hostname!
     
     cd VPN-Firewall
     
-    sudo cp ./usr/bin/vpnfirewall /usr/bin/
+    sudo cp ./usr/bin/vpnfirewall /usr/local/bin/
     
 4) Edit the /usr/bin/vpnfirewall settings with your favorite editor.
 
