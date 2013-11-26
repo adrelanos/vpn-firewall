@@ -26,7 +26,9 @@ trap "error_handler" ERR INT TERM
 ## IP address of the VPN server.
 ## Get the IP using: nslookup vpn-example-server.org
 ## Example: seattle.vpn.riseup.net
-VPN_SERVER=198.252.153.26
+## Some providers provide multiple VPN servers.
+## You can enter multiple IP addresses, separated by spaces
+VPN_SERVERS="198.252.153.26"
 
 ## For OpenVPN.
 VPN_INTERFACE=tun0
@@ -152,7 +154,9 @@ iptables -A FORWARD -j REJECT --reject-with icmp-admin-prohibited
 iptables -A OUTPUT -o "$VPN_INTERFACE" -j ACCEPT
 
 ## XXX
-iptables -A OUTPUT -d "$VPN_SERVER" -j ACCEPT
+for SERVER in $VPN_SERVERS; do
+  iptables -A OUTPUT -d "$SERVER" -j ACCEPT
+done
 
 ## Existing connections are accepted.
 iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
