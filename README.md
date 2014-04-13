@@ -49,11 +49,11 @@ Use the IP to connect to your VPN server, not the hostname!
     cd ~
 
     git clone https://github.com/adrelanos/VPN-Firewall.git
-    
+
     cd VPN-Firewall
-    
+
     sudo cp ./usr/bin/vpnfirewall /usr/bin/
-    
+
 4) Edit the /usr/bin/vpnfirewall settings with your favorite editor.
 
 Note, that you must use the IP of your VPN server, not the hostname.
@@ -80,11 +80,11 @@ Install the init script.
     sudo cp ./etc/init.d/vpnfirewall /etc/init.d/
 
     sudo update-rc.d vpnfirewall defaults
-    
-Test the init script.    
-    
+
+Test the init script.
+
     sudo service vpnfirewall restart
-    
+
     sudo service vpnfirewall status
 
     echo $?
@@ -98,7 +98,7 @@ Reboot.
 Check VPN Firewall status again.
 
     sudo service vpnfirewall status
-    
+
 Should reply:
 
     0
@@ -114,7 +114,7 @@ Should reply:
 Example OpenVPN:
 
     sudo killall openvpn
-    
+
 4) Check if you can still connect to whatismyipaddress.com.
 
 If yes, bad, something is wrong.
@@ -150,14 +150,11 @@ Welcome.
 
 # Author
 
-* e-mail: adrelanos at riseup dot net
-* [Homepage / OpenPGP](https://github.com/adrelanos/Whonix/blob/master/adrelanos.mediawiki)
+* Patrick Schleizer
+* e-mail: adrelanos@riseup.net
+* [gpg](https://www.whonix.org/wiki/Patrick_Schleizer): 916B8D99C38EAF5E8ADC7A2A8D66066A2EEACCDA
 * twitter: https://twitter.com/Whonix
-* Donate
-
-BTC
-
-    1JgzCCSox56Sh4NnQJqRiwoxKi8oVSZBEd
+* [Donate](https://www.whonix.org/wiki/Donate)
 
 # License
 
