@@ -103,6 +103,11 @@ Should reply:
 
     0
 
+6) How to unload VPN Firewall?
+
+If you want to disable VPN Firewall, see:
+https://gist.github.com/adrelanos/10565852
+
 # How to Test
 
 1) Install.
