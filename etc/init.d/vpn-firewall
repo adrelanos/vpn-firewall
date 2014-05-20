@@ -2,7 +2,7 @@
 ### BEGIN INIT INFO
 # Provides:          vpnfirewall
 # Required-Start:    mountkernfs $local_fs $remote_fs $syslog
-# Required-Stop:
+# Required-Stop:     remote_fs
 # X-Start-Before:    networking
 # X-Stop-After:      networking
 # Default-Start:     2 3 4 5
