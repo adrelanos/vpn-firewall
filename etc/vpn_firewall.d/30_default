@@ -1,0 +1,24 @@
+## Copyright (C) 2012 - 2014 Patrick Schleizer <adrelanos@riseup.net>
+## See the file COPYING for copying conditions.
+
+## Please use "/etc/vpn_firewall.d/50_user" for your custom configuration,
+## which will override the defaults found here. When VPN-Firewall is updated,
+## this file may be overwritten.
+
+## bash fragment
+
+## debugging
+#set -x
+
+## IP address of the VPN server.
+## Get the IP using: nslookup vpn-example-server.org
+## Example: seattle.vpn.riseup.net
+## Some providers provide multiple VPN servers.
+## You can enter multiple IP addresses, separated by spaces
+VPN_SERVERS="198.252.153.26"
+
+## For OpenVPN.
+VPN_INTERFACE=tun0
+
+## Destinations you don not want routed through the VPN.
+LOCAL_NET="192.168.1.0/24 192.168.0.0/24 127.0.0.0/8"

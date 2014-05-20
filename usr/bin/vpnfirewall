@@ -1,10 +1,12 @@
 #!/bin/bash
 
-###########################
-## debugging
-###########################
-
-#set -x
+######################################################################
+## DO NOT CHANGE ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING! #
+## DO NOT CHANGE ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING! #
+## DO NOT CHANGE ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING! #
+## DO NOT CHANGE ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING! #
+## DO NOT CHANGE ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING! #
+######################################################################
 
 ###########################
 ## error_handler
@@ -20,29 +22,32 @@ error_handler() {
 trap "error_handler" ERR INT TERM
 
 ###########################
-## configuration
+## source config folder
 ###########################
 
-## IP address of the VPN server.
-## Get the IP using: nslookup vpn-example-server.org
-## Example: seattle.vpn.riseup.net
-## Some providers provide multiple VPN servers.
-## You can enter multiple IP addresses, separated by spaces
-VPN_SERVERS="198.252.153.26"
+for i in /etc/vpn_firewall.d/*; do
+   if [ -f "$i" ]; then
+      ## If the last character is a ~, ignore that file, because it was created
+      ## by some editor, which creates backup files.
+      if [ "${i: -1}" = "~" ]; then
+         continue
+      fi
+      ## Skipping files such as .dpkg-old and .dpkg-dist.
+      if ( echo "$i" | grep -q ".dpkg-" ); then
+         true "skip $i"
+         continue
+      fi
+      source "$i"
+   fi
+done
 
-## For OpenVPN.
-VPN_INTERFACE=tun0
+#############
+## defaults #
+#############
 
-## Destinations you don not want routed through the VPN.
-LOCAL_NET="192.168.1.0/24 192.168.0.0/24 127.0.0.0/8"
-
-######################################################################
-## DO NOT CHANGE ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING! #
-## DO NOT CHANGE ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING! #
-## DO NOT CHANGE ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING! #
-## DO NOT CHANGE ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING! #
-## DO NOT CHANGE ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING! #
-######################################################################
+[ -n "$VPN_SERVERS" ] || VPN_SERVERS="198.252.153.26"
+[ -n "$VPN_INTERFACE" ] || VPN_INTERFACE="tun0"
+[ -n "$LOCAL_NET" ] || LOCAL_NET="192.168.1.0/24 192.168.0.0/24 127.0.0.0/8"
 
 ###########################
 ## root check
@@ -186,7 +191,7 @@ ip6tables -F
 ip6tables -X
 ip6tables -t mangle -F
 ip6tables -t mangle -X
- 
+
 ## Allow unlimited access on loopback.
 ## Not activated, since we do not need it.
 #ip6tables -A INPUT -i lo -j ACCEPT
