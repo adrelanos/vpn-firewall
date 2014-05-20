@@ -8,7 +8,7 @@ It's much safer when it fails closed, i.e. when the VPN connection breaks down, 
 * Forbid outgoing traffic after the VPN software broke down for some reason.
 * Tight firewall rules, using iptables policy drop.
 * Only tested with OpenVPN. Should work with other VPN clients such as PPTP in theory, you should test if it does what it claims anyway.
-* Only tested on Debian Wheezy and [Whonix](https://github.com/adrelanos/Whonix). Should work on any other Linux distribution in theory, you should test if it does what it claims.
+* Only tested on Debian Wheezy and [Whonix-Workstation](https://github.com/adrelanos/Whonix). Should work on any other Linux distribution in theory, you should test if it does what it claims.
 * Open Source / Free Software
 
 # What does it NOT do
@@ -23,6 +23,7 @@ IP and sends it somewhere though the VPN.
 manipulate the firewall rules.
 * Prevent any other kind trickery to circumvent using the VPN.
 * Prevent leaks caused by bugs in the VPN software.
+* Be compatible with Whonix-Gateway. (VPN-Firewall is incompatible with Whonix-Gateway's firewall!)
 * Run the VPN software as unprivileged user. For OpenVPN see
 [OpenVPN wiki UnprivilegedUser](https://community.openvpn.net/openvpn/wiki/
 UnprivilegedUser).
