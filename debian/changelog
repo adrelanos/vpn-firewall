@@ -1,5 +1,5 @@
-vpnfirewall (0.1) UNRELEASED; urgency=low
+vpn-firewall (0.1-1) UNRELEASED; urgency=low
 
-  * Initial release. (Closes: #000000)
+  * Initial release.
 
- -- adrelanos <adrelanos@riseup.net>  Mon, 06 May 2013 07:38:09 +0000
+ -- Patrick Schleizer <adrelanos@riseup.net>  Sun, 09 Mar 2014 14:47:45 +0000

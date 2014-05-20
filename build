@@ -1,0 +1,75 @@
+#!/bin/bash
+
+## Copyright (C) 2012 - 2014 Patrick Schleizer <adrelanos@riseup.net>
+## See the file COPYING for copying conditions.
+
+## generic deb build script version 0.2
+
+set -x
+
+if [ -f /usr/lib/pre.bsh ]; then
+   source /usr/lib/pre.bsh
+fi
+
+set -e
+set -o pipefail
+
+package_name="$(basename $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd ))"
+
+## {{ get upstream version number from debian/changelog
+
+command -v dpkg-parsechangelog >/dev/null
+OIFS="${IFS}"
+NIFS=$'\n'
+IFS="${NIFS}"
+for line in $(dpkg-parsechangelog); do
+   ## Example line:
+   ## Version: 0.1-1
+   IFS="${OIFS}"
+   read -r first second _ <<< "$line"
+   ## Example first:
+   ## Version:
+   ## Example second:
+   ## 0.1-1
+   first="${first,,}"
+   ## Example first:
+   ## version
+   if [ "$first" = "version:" ]; then
+      version="$second"
+      ## Example version:
+      ## 0.1-1
+      version="${version%-*}"
+      ## Example version:
+      ## 0.1
+      break
+   fi
+done
+IFS="${OIFS}"
+
+if [ "$version" = "" ]; then
+   true "ERROR: variable version is empty."
+   exit 1
+fi
+
+## }} get upstream version number from debian/changelog
+
+./clean
+
+## Explicitly set access time, so we end up with a deterministic debian.tar.gz file.
+shopt -s globstar
+touch -t "201308151102.35" ./debian
+touch -t "201308151102.35" ./debian/**
+shopt -u globstar
+
+rm --force "../${package_name}_${version}.orig.tar.gz"
+
+git archive \
+   --format=tar HEAD \
+   | gzip -n > "../${package_name}_${version}.orig.tar.gz"
+
+ls -la "../${package_name}_${version}.orig.tar.gz"
+
+debuild \
+   --rootcmd="debian/gain-root-command" \
+   -sa \
+   ${1+"$@"}

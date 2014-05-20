@@ -1,16 +1,17 @@
-Source: vpnfirewall
-Section: net
-Priority: extra
-Maintainer: adrelanos <adrelanos@riseup.net>
-Build-Depends: debhelper (>= 7.0.50~)
-Standards-Version: 3.9.4
-Homepage: https://github.com/adrelanos/VPN-Firewall
-Vcs-Git: https://github.com/adrelanos/Whonix.git
-Vcs-Browser: https://github.com/adrelanos/Whonix.git
+## Copyright (C) 2012 - 2014 Patrick Schleizer <adrelanos@riseup.net>
+## See the file COPYING for copying conditions.
 
-Package: vpnfirewall
+Source: vpn-firewall
+Section: net
+Priority: optional
+Maintainer: Patrick Schleizer <adrelanos@riseup.net>
+Build-Depends: debhelper (>= 8), faketime, git
+Homepage: https://github.com/adrelanos/VPN-Firewall
+Vcs-Browser: https://github.com/adrelanos/VPN-Firewall
+Vcs-Git: https://github.com/adrelanos/VPN-Firewall.git
+Standards-Version: 3.9.4
+
+Package: vpn-firewall
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, iptables
-Description: VPN-Firewall
- Leak Protection (Fail Safe Mechanism) for (Open)VPN 
- 
+Depends: ${misc:Depends}
+Description: Ensures no traffic is send, once OpenVPN breaks down for some reason
