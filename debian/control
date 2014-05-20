@@ -15,3 +15,13 @@ Package: vpn-firewall
 Architecture: all
 Depends: ${misc:Depends}
 Description: Ensures no traffic is send, once OpenVPN breaks down for some reason
+ If you simply add a VPN using common instructions, it generally fails open.
+ That means, if the VPN breaks down, because the connection is interrupted,
+ traffic will be send without the VPN.
+ .
+ It's much safer when it fails closed, i.e. when the VPN connection breaks down,
+ the whole internet connection must be down as long as the VPN connection isn't
+ restored.
+ .
+ VPN-Firewall helps solving that problem. See its full readme for a list of
+ things it does (not) do.
