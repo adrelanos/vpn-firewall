@@ -1,6 +1,6 @@
 #! /bin/bash
 ### BEGIN INIT INFO
-# Provides:          vpnfirewall
+# Provides:          vpn-firewall
 # Required-Start:    mountkernfs $local_fs $remote_fs $syslog
 # Required-Stop:     $remote_fs
 # X-Start-Before:    networking
@@ -11,12 +11,12 @@
 # Description:       Ensures no traffic is send, once OpenVPN breaks down for some reason.
 ### END INIT INFO
 
-# Author: adrelanos <adrelanos at riseup dot net>
+# Author: Patrick Schleizer <adrelanos@riseup.net>
 
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Ensures no traffic is send, once OpenVPN breaks down for some reason."
-NAME=vpnfirewall
+NAME=vpn-firewall
 DAEMON=/usr/bin/$NAME
 #DAEMON_ARGS="--options args"
 PIDFILE=/var/run/$NAME/pid
