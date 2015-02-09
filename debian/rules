@@ -11,7 +11,5 @@
 override_dh_install:
 	dh_installinit --onlyscripts
 
-clean:
-	make clean
-
-.PHONY: clean build
+override_dh_installchangelogs:
+	dh_installchangelogs changelog.upstream upstream
