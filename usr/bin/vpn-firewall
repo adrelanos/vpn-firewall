@@ -25,7 +25,7 @@ trap "error_handler" ERR INT TERM
 ## source config folder
 ###########################
 
-for i in /etc/vpn_firewall.d/*; do
+for i in /etc/vpn-firewall.d/*; do
    if [ -f "$i" ]; then
       ## If the last character is a ~, ignore that file, because it was created
       ## by some editor, which creates backup files.
