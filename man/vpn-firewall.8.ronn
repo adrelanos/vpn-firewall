@@ -1,0 +1,42 @@
+whonix_firewall(8) -- Whonix-Gateway Firewall
+=============================================
+
+<span class="comment">
+# This file is part of Whonix.
+# Copyright (C) 2012 - 2014 Patrick Schleizer adrelanos@riseup.net
+# See the file COPYING for copying conditions.
+
+# Not using angle brackets in copyright notice for e-mail address, because
+# angle brackets would result in this file being non-deterministic. (There
+# must be a bug in Debian wheezy in ruby-ronn.)
+
+# Not using "##", because for some reason this comment would be visible in the
+# resulting man page.
+</span>
+
+## SYNOPSIS
+
+`vpn-firewall`
+
+## DESCRIPTION
+
+Gets autostarted by default. Only useful to start manually, if you changed
+settings in `/etc/vpn-firewall.d/` configuration folder and did not restart.
+
+## RETURN VALUES
+
+0 Success
+
+1 Error
+
+## EXAMPLE
+
+`sudo vpn-firewall`
+
+## WWW
+
+https://github.com/adrelanos/vpn-firewall
+
+## AUTHOR
+
+This man page has been written by Patrick Schleizer (adrelanos@riseup.net).
