@@ -34,7 +34,7 @@ VPN_SERVERS="198.252.153.26"
 VPN_INTERFACE=tun0
 
 ## Destinations you don not want routed through the VPN.
-LOCAL_NET="192.168.1.0/24 192.168.0.0/24 127.0.0.0/8"
+LOCAL_NET="127.0.0.0/8 10.0.0.0/8 192.168.0.0/16 172.16.0.0/12"
 
 ######################################################################
 ## DO NOT CHANGE ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING! #
@@ -186,7 +186,7 @@ ip6tables -F
 ip6tables -X
 ip6tables -t mangle -F
 ip6tables -t mangle -X
- 
+
 ## Allow unlimited access on loopback.
 ## Not activated, since we do not need it.
 #ip6tables -A INPUT -i lo -j ACCEPT
