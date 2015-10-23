@@ -1,0 +1,8 @@
+## full path to config for openvpn
+VPN_CONFIG="/etc/openvpn/openvpn.conf"
+
+## local lan ip address list in CDIR format
+LOCAL_NET="192.168.1.0/24 127.0.0.0/8"
+
+## vpn interface
+VPN_INTERFACE="tun0"

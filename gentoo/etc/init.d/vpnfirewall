@@ -1,0 +1,267 @@
+#!/sbin/runscript
+
+## vpnfirewall config
+VPNFIREWALL_CONFIG="/etc/vpnfirewall/config"
+
+######################################################################
+## DO NOT CHANGE ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING! #
+## DO NOT CHANGE ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING! #
+## DO NOT CHANGE ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING! #
+## DO NOT CHANGE ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING! #
+## DO NOT CHANGE ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING! #
+######################################################################
+
+depend() {
+  after xdm
+  before openvpn
+}
+
+start() {
+
+
+  ###########################
+  ## debugging
+  ###########################
+
+  #set -x
+
+  ###########################
+  ## configuration
+  ###########################
+
+  ## the full path to the config file for the connection
+  VPN_CONFIG=$(grep -P -i 'VPN_CONFIG=.*' $VPNFIREWALL_CONFIG | sed 's/"//g' | sed "s/'//g" | sed 's/.*=//')
+
+  ## For OpenVPN
+  VPN_INTERFACE=$(grep -P -i 'VPN_INTERFACE=.*' $VPNFIREWALL_CONFIG | sed 's/"//g' | sed "s/'//g" | sed 's/.*=//')
+
+  ## Destinations you don not want routed through the VPN.
+  LOCAL_NET=$(grep -P -i 'LOCAL_NET=.*' $VPNFIREWALL_CONFIG | sed 's/"//g' | sed "s/'//g" | sed 's/.*=//')
+
+  ## get protocal from config file
+  VPN_PROTOS=$(grep -P -i '^proto[\s][^\s]*$' $VPN_CONFIG)
+  VPN_PROTOS=$(echo "$VPN_PROTOS" | awk '{print $2}')
+  VPN_PROTOS=$(echo "$VPN_PROTOS" | xargs -n1 | sort -u | xargs)
+
+  ## get URLs and ports from config file
+  VPN_REMOTE_CMD=$(grep -P -i '^remote[\s][^\s]*[\s][0-9]*$' $VPN_CONFIG)
+
+  ## ports of the vpn server
+  VPN_PORTS=$(echo "$VPN_REMOTE_CMD" | awk '{print $3}')
+  VPN_PORTS=$(echo "$VPN_PORTS" | xargs -n1 | sort -u | xargs)
+
+  ## url of the VPN server
+  VPN_URLS=$(echo "$VPN_REMOTE_CMD" | awk '{print $2}')
+  VPN_URLS=$(echo "$VPN_URLS" | xargs -n1 | sort -u | xargs)
+
+  ## get the ip addresses of the VPN server 
+  VPN_SERVERS=$(getent hosts $VPN_URLS | awk '{print $1}')
+  VPN_SERVERS=$(echo "$VPN_SERVERS" | xargs -n1 | sort -u | xargs)
+
+  ###########################
+  ## comments
+  ###########################
+
+  ## --reject-with
+  ## http://ubuntuforums.org/showthread.php?p=12011099
+
+  ## Set to icmp-admin-prohibited because icmp-port-unreachable caused
+  ## confusion. icmp-port-unreachable looks like a bug while
+  ## icmp-admin-prohibited hopefully makes clear it is by design.
+
+  echo "OK: Loading VPN firewall..."
+
+  ###########################
+  ## IPv4 DEFAULTS
+  ###########################
+
+  ## Set secure defaults.
+  iptables -P INPUT DROP
+
+  ## FORWARD rules does not actually do anything if forwarding is disabled. Better be safe just in case.
+  iptables -P FORWARD DROP
+
+  ## Only the VPN process is allowed to establish outgoing connections.
+  iptables -P OUTPUT DROP
+
+  ###########################
+  ## IPv4 PREPARATIONS
+  ###########################
+
+  ## Flush old rules.
+  iptables -F
+  iptables -X
+  iptables -t nat -F
+  iptables -t nat -X
+  iptables -t mangle -F
+  iptables -t mangle -X
+
+  ############################
+  ## IPv4 DROP INVALID PACKAGES
+  ############################
+
+  ## DROP INVALID
+  iptables -A INPUT -m state --state INVALID -j DROP
+
+  ## DROP INVALID SYN PACKETS
+  iptables -A INPUT -p tcp --tcp-flags ALL ACK,RST,SYN,FIN -j DROP
+  iptables -A INPUT -p tcp --tcp-flags SYN,FIN SYN,FIN -j DROP
+  iptables -A INPUT -p tcp --tcp-flags SYN,RST SYN,RST -j DROP
+
+  ## DROP PACKETS WITH INCOMING FRAGMENTS. THIS ATTACK ONCE RESULTED IN KERNEL PANICS
+  iptables -A INPUT -f -j DROP
+
+  ## DROP INCOMING MALFORMED XMAS PACKETS
+  iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP
+
+  ## DROP INCOMING MALFORMED NULL PACKETS
+  iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP
+
+  ###########################
+  ## IPv4 INPUT
+  ###########################
+
+  ## Traffic on the loopback interface is accepted.
+  iptables -A INPUT -i lo -j ACCEPT
+
+  ## Established incoming connections are accepted.
+  iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+  ## Allow all incoming connections on the virtual VPN network interface.
+  iptables -A INPUT -i "$VPN_INTERFACE" -j ACCEPT
+
+  ## Log.
+  iptables -A INPUT -j LOG --log-prefix "VPN firewall blocked input4: "
+
+  ## Reject anything not explicitly allowed above.
+  ## Drop is better than reject here, because ...
+  iptables -A INPUT -j DROP
+
+  ###########################
+  ## IPv4 FORWARD
+  ###########################
+
+  ## Log.
+  iptables -A FORWARD -j LOG --log-prefix "VPN firewall blocked forward4: "
+
+  ## Reject everything.
+  iptables -A FORWARD -j REJECT --reject-with icmp-admin-prohibited
+
+  ###########################
+  ## IPv4 OUTPUT
+  ###########################
+
+  ## allow out on VPN TUN
+  iptables -A OUTPUT -o "$VPN_INTERFACE" -j ACCEPT
+
+  ## only allow out to the set of IPs, PORTs, and PROTOCALs
+  for SERVER in $VPN_SERVERS; do
+    for PORT in $VPN_PORTS; do
+      for PROTO in $VPN_PROTOS; do
+        iptables -A OUTPUT -d "$SERVER" -p "$PROTO" --dport "$PORT" -j ACCEPT
+      done
+    done
+  done
+
+  ## Existing connections are accepted.
+  iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+  ## Accept outgoing connections to local network.
+  for NET in $LOCAL_NET; do
+    iptables -A OUTPUT -d "$NET" -j ACCEPT
+  done
+
+  ## Log.
+  iptables -A OUTPUT -j LOG --log-prefix "VPN firewall blocked output4: "
+
+  ## Reject all other outgoing traffic.
+  iptables -A OUTPUT -j REJECT --reject-with icmp-admin-prohibited
+
+  ###########################
+  ## IPv6
+  ###########################
+
+  ## Policy DROP for all traffic as fallback.
+  ip6tables -P INPUT DROP
+  ip6tables -P OUTPUT DROP
+  ip6tables -P FORWARD DROP
+
+  ## Flush old rules.
+  ip6tables -F
+  ip6tables -X
+  ip6tables -t mangle -F
+  ip6tables -t mangle -X
+ 
+  ## Allow unlimited access on loopback.
+  ## Not activated, since we do not need it.
+  #ip6tables -A INPUT -i lo -j ACCEPT
+  #ip6tables -A OUTPUT -o lo -j ACCEPT
+
+  ## Log.
+  ip6tables -A INPUT -j LOG --log-prefix "VPN firewall blocked input6: "
+  ip6tables -A OUTPUT -j LOG --log-prefix "VPN firewall blocked output6: "
+  ip6tables -A FORWARD -j LOG --log-prefix "VPN firewall blocked forward6: "
+
+  ## Drop/reject all other traffic.
+  ip6tables -A INPUT -j DROP
+
+  ## --reject-with icmp-admin-prohibited not supported by ip6tables
+  ip6tables -A OUTPUT -j REJECT
+
+  ## --reject-with icmp-admin-prohibited not supported by ip6tables
+  ip6tables -A FORWARD -j REJECT
+
+  #echo "OK: The firewall should not show any messages,"
+  #echo "OK: besides output beginning with prefix OK:..."
+  echo "OK: VPN firewall loaded."
+
+  exit 0
+
+}
+
+stop() {
+
+  ###########################
+  ## debugging
+  ###########################
+  #set -x
+
+  echo "OK: Unloading VPN firewall...."
+
+  ###########################
+  ## IPv4
+  ###########################
+
+  ## flush vpn firewall ipv4 rules
+  iptables -F
+  iptables -X
+  iptables -t nat -F
+  iptables -t nat -X
+  iptables -t mangle -F
+  iptables -t mangle -X
+
+  ## set back to default allowed
+  iptables -P INPUT ACCEPT
+  iptables -P OUTPUT ACCEPT
+  iptables -P FORWARD ACCEPT
+
+  ###########################
+  ## IPv6
+  ###########################
+
+  ## flush vpn firewall ipv6 rules
+  ip6tables -F
+  ip6tables -X
+  ip6tables -t nat -F
+  ip6tables -t nat -X
+  ip6tables -t mangle -F
+  ip6tables -t mangle -X
+
+  ## set back to default allowed
+  ip6tables -P INPUT ACCEPT
+  ip6tables -P OUTPUT ACCEPT
+  ip6tables -P FORWARD ACCEPT
+
+  echo "OK: VPN firewall unloaded."
+
+}
