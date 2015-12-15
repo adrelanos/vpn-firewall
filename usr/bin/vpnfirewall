@@ -28,7 +28,20 @@ trap "error_handler" ERR INT TERM
 ## Example: seattle.vpn.riseup.net
 ## Some providers provide multiple VPN servers.
 ## You can enter multiple IP addresses, separated by spaces
-VPN_SERVERS="198.252.153.26"
+## Alternative with VPN by PIA:
+## server IP addresses are being fetched automatically
+## or first parameter is the country subdomain id of PIA
+## Example: sudo /usr/bin/vpnfirewall us-florida
+VPN_SERVERS=""
+VPN_PIA_COUNTRIES="us-california us-east us-midwest us-texas us-florida us-seattle us-west us-siliconvalley us-newyorkcity uk-london uk-southampton ca-toronto ca aus aus-melbourne nz nl sweden no denmark swiss france germany ireland italy russia ro turkey hk sg japan israel mexico brazil in"
+
+if [[ -n $1 ]] ; then
+        VPN_PIA_COUNTRIES=$1
+        echo "OK: Identified PIA country code $1"
+fi
+if [[ -n $VPN_PIA_COUNTRIES ]] ; then
+        VPN_SERVERS=$(for coun in $VPN_PIA_COUNTRIES ; do getent hosts $coun.privateinternetaccess.com | awk '{b=b" "$1} END{print b}'; done)
+fi
 
 ## For OpenVPN.
 VPN_INTERFACE=tun0
