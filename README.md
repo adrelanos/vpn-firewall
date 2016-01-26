@@ -8,7 +8,7 @@ It's much safer when it fails closed, i.e. when the VPN connection breaks down, 
 * Forbid outgoing traffic after the VPN software broke down for some reason.
 * Tight firewall rules, using iptables policy drop.
 * Only tested with OpenVPN. Should work with other VPN clients such as PPTP in theory, you should test if it does what it claims anyway.
-* Only tested on Debian Wheezy and [Whonix](https://github.com/adrelanos/Whonix). Should work on any other Linux distribution in theory, you should test if it does what it claims.
+* Only tested on Debian Wheezy. Should work in many Linux distribution in theory, you should test if it does what it claims.
 * Open Source / Free Software
 
 # What does it NOT do
@@ -31,6 +31,7 @@ UnprivilegedUser).
 * Configure (Open)VPN.
 * Autostart (Open)VPN.
 * Anything else not mentioned above in "What does it do".
+* Untested to work in Qubes ProxyVMs. (They have a different way to up networking and firewall.)
 
 # How to Use
 1) First learn how to get your VPN software connected without using VPN-Firewall.
