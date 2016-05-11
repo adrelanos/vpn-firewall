@@ -1,3 +1,84 @@
+commit 23f1a3046cd81ebcc714fe5c9e69e0ffa090f09c
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Jan 26 19:46:36 2016 +0100
+
+    updated readme
+    
+    Conflicts:
+    	README.md
+
+commit 12a9a7baacb3cf6be456ae0c769ce382462db6c1
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Jan 20 19:31:29 2016 +0100
+
+    etc/vpn-firewall.d/30_default -> etc/vpn-firewall.d/30_default.conf
+
+commit 5d0c2a1bac3e90d4fb3bbedfe34e6adf4d4b6def
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Jan 20 19:30:59 2016 +0100
+
+    source only configuration files ending with .conf
+
+commit 619cbc3d97da1ef8b89d8d1b7fced3087585a27f
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:59:32 2015 +0000
+
+    comment
+
+commit c4f9fc1eb7efcf1dcb9c8b2592247a17398a398e
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:48:47 2015 +0000
+
+    added man page
+
+commit 644d69af42dd9fd114e29d53d04495cb23dcf1f2
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:46:03 2015 +0000
+
+    update
+
+commit 4a6921ca34d1c3f5cf151cd4f391e882386e14cf
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:45:22 2015 +0000
+
+    renamed:    etc/vpn_firewall.d/30_default -> etc/vpn-firewall.d/30_default
+
+commit f51763f36baba7ce935bc84fffe263f0b75e84bc
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:44:13 2015 +0000
+
+    renamed:    usr/bin/vpnfirewall -> usr/bin/vpn-firewall
+
+commit 044e193c9c7cc03fbab854963e95e49a5c6349aa
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:42:30 2015 +0000
+
+    init script: provide itself to fix lintian warning
+
+commit 98b3b7ed88622f9411dbb47f425eab251c5750ef
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:41:00 2015 +0000
+
+    fixed lintian warning in machine readable copyright file
+
+commit f36bedc0caad0ab7c89046ac70e37cc630c6a1ee
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:39:14 2015 +0000
+
+    fixed debian/changelog
+
+commit c27d7bdfbff37ccb32fd048b0a6e84c22317ea4f
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:35:00 2015 +0000
+
+    updated debian/rules
+
+commit 215f5223fe3609052772fccfbe77c08eeccb38f4
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:34:25 2015 +0000
+
+    added upstream changelog
+
 commit bdab55e8d273d62d3f63569fc0487916f26c3432
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Mon Feb 9 13:34:04 2015 +0000

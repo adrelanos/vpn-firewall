@@ -1,4 +1,4 @@
-whonix_firewall(8) -- Whonix-Gateway Firewall
+ip-unpriv(8) -- wrapper to run `ip` as unprivileged user
 =============================================
 
 <span class="comment">
@@ -15,28 +15,7 @@ whonix_firewall(8) -- Whonix-Gateway Firewall
 </span>
 
 ## SYNOPSIS
-
-`vpn-firewall`
-
-## DESCRIPTION
-
-Gets autostarted by default. Only useful to start manually, if you changed
-settings in `/etc/vpn-firewall.d/` configuration folder and did not restart.
-
-## RETURN VALUES
-
-0 Success
-
-1 Error
-
-## EXAMPLE
-
-`sudo vpn-firewall`
-
-## WWW
-
-https://github.com/adrelanos/vpn-firewall
+`ip-unpriv` [option]s
 
 ## AUTHOR
-
 This man page has been written by Patrick Schleizer (adrelanos@riseup.net).

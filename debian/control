@@ -9,11 +9,11 @@ Build-Depends: debhelper (>= 8), faketime, git
 Homepage: https://github.com/adrelanos/VPN-Firewall
 Vcs-Browser: https://github.com/adrelanos/VPN-Firewall
 Vcs-Git: https://github.com/adrelanos/VPN-Firewall.git
-Standards-Version: 3.9.4
+Standards-Version: 3.9.6
 
 Package: vpn-firewall
 Architecture: all
-Depends: ${misc:Depends}
+Depends: netfilter-persistent, ${misc:Depends}
 Description: Ensures no traffic is send, once OpenVPN breaks down for some reason
  If you simply add a VPN using common instructions, it generally fails open.
  That means, if the VPN breaks down, because the connection is interrupted,
