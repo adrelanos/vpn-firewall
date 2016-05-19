@@ -5,7 +5,7 @@ Source: vpn-firewall
 Section: net
 Priority: optional
 Maintainer: Patrick Schleizer <adrelanos@riseup.net>
-Build-Depends: debhelper (>= 8), faketime, git
+Build-Depends: debhelper (>= 8), faketime, git, config-package-dev
 Homepage: https://github.com/adrelanos/VPN-Firewall
 Vcs-Browser: https://github.com/adrelanos/VPN-Firewall
 Vcs-Git: https://github.com/adrelanos/VPN-Firewall.git
