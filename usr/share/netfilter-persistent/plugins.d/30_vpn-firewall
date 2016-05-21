@@ -42,9 +42,16 @@ source_config_folder() {
 defaults() {
    [ -n "$iptables_cmd" ] || iptables_cmd="iptables --wait"
    [ -n "$ip6tables_cmd" ] || ip6tables_cmd="ip6tables --wait"
-   [ -n "$VPN_INTERFACE" ] || VPN_INTERFACE="tun0"
+   [ -n "$VPN_INTERFACE" ] || VPN_INTERFACE="tun+"
    [ -n "$LOCAL_NET" ] || LOCAL_NET="192.168.1.0/24 192.168.0.0/24 127.0.0.0/8"
    [ -n "$TUNNEL_USER" ] || TUNNEL_USER="$(id -u tunnel)"
+   ## Internal interface
+   if [ -d "/usr/lib/qubes" ]; then
+      [ -n "$INT_IF" ] || INT_IF="vif+"
+   else
+      [ -n "$INT_IF" ] || INT_IF="eth1"
+   fi
+   [ -n "$FORWARDING" ] || FORWARDING=false
 }
 
 root_check() {
@@ -116,6 +123,10 @@ start() {
    ## Allow all incoming connections on the virtual VPN network interface.
    $iptables_cmd -A INPUT -i "$VPN_INTERFACE" -j ACCEPT
 
+   if [ "$FORWARDING" = "true" ]; then
+      $iptables_cmd -t nat -A POSTROUTING -j MASQUERADE
+   fi
+
    ## Log.
    $iptables_cmd -A INPUT -j LOG --log-prefix "VPN firewall blocked input4: "
 
@@ -126,6 +137,11 @@ start() {
    ###########################
    ## IPv4 FORWARD
    ###########################
+
+   if [ "$FORWARDING" = "true" ]; then
+      $iptables_cmd -A FORWARD -o "$VPN_INTERFACE" -j ACCEPT
+      $iptables_cmd -A FORWARD -o "$INT_IF" -j ACCEPT
+   fi
 
    ## Log.
    $iptables_cmd -A FORWARD -j LOG --log-prefix "VPN firewall blocked forward4: "
@@ -195,6 +211,7 @@ start() {
 
    echo "OK: The firewall should not show any messages,"
    echo "OK: besides output beginning with prefix OK:..."
+   echo "OK: FORWARDING: $FORWARDING"
    echo "OK: VPN firewall loaded."
 }
 
