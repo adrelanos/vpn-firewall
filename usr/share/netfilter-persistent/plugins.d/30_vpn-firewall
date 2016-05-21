@@ -14,6 +14,9 @@
 ## confusion. icmp-port-unreachable looks like a bug while
 ## icmp-admin-prohibited hopefully makes clear it is by design.
 
+set -e
+set -o errtrace
+
 error_handler() {
   echo "##################################################"
   echo "VPN firewall script failed!"
@@ -124,6 +127,35 @@ start() {
    $iptables_cmd -A INPUT -i "$VPN_INTERFACE" -j ACCEPT
 
    if [ "$FORWARDING" = "true" ]; then
+      if [ -d "/usr/lib/qubes" ]; then
+         if [ -e /var/run/qubes/qubes-ns ]; then
+            ## sets: NS1
+            ## sets: NS2
+            source /var/run/qubes/qubes-ns
+
+            grep ^nameserver /etc/resolv.conf | grep -v ":.*:" | head -2 |
+               (
+                  while read x y z ; do
+                     etc_resolv_conf_dns_server="$y"
+
+                     ## Without these rules, any VPN-Workstation would have to configure its /etc/resolv.conf to point
+                     ## to the VPN nameserver.
+                     ## Inspired by qubes-setup-dnat-to-ns.
+                     ## https://github.com/QubesOS/qubes-core-agent-linux/blob/master/network/qubes-setup-dnat-to-ns
+
+                     $iptables_cmd -t nat -A PREROUTING -d "$NS1" -p udp --dport 53 -j DNAT --to "$etc_resolv_conf_dns_server"
+                     $iptables_cmd -t nat -A PREROUTING -d "$NS1" -p tcp --dport 53 -j DNAT --to "$etc_resolv_conf_dns_server"
+
+                     $iptables_cmd -t nat -A PREROUTING -d "$NS2" -p udp --dport 53 -j DNAT --to "$etc_resolv_conf_dns_server"
+                     $iptables_cmd -t nat -A PREROUTING -d "$NS2" -p tcp --dport 53 -j DNAT --to "$etc_resolv_conf_dns_server"
+                  done
+               )
+         else
+            echo "WARNING: /var/run/qubes/qubes-ns does not exist. \
+DNS for VPN-Workstations will not work unless it gets manually configured to point to the VPN nameserver."
+         fi
+      fi
+
       $iptables_cmd -t nat -A POSTROUTING -j MASQUERADE
    fi
 
