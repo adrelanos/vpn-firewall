@@ -7,7 +7,7 @@ It's much safer when it fails closed, i.e. when the VPN connection breaks down, 
 
 * Forbid outgoing traffic after the VPN / tunnel software broke down for some reason.
 * Tight firewall rules, using iptables policy drop.
-* Defeat [shared VPN/Tor server leak bug](https://github.com/adrelanos/vpn-firewall/issues/12)
+* Defeat [shared VPN/Tor server leak bug](https://github.com/adrelanos/vpn-firewall/issues/12).
 * Only tested with OpenVPN. Should work with other VPN and tunnel clients such as PPTP in theory, you should test if it does what it claims anyway.
 * Only tested on Debian Jessie. Should work in many Linux distribution supporting netfilter-persistent in theory, you should test if it does what it claims.
 * Open Source / Free Software
@@ -31,7 +31,6 @@ manipulate the firewall rules.
 * Configure (Open)VPN.
 * Autostart (Open)VPN.
 * Anything else not mentioned above in "What does it do".
-* Untested to work in Qubes ProxyVMs. (They have a different way to up networking and firewall.)
 
 # How to Use
 
