@@ -1,0 +1,288 @@
+commit 23f1a3046cd81ebcc714fe5c9e69e0ffa090f09c
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Jan 26 19:46:36 2016 +0100
+
+    updated readme
+    
+    Conflicts:
+    	README.md
+
+commit 12a9a7baacb3cf6be456ae0c769ce382462db6c1
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Jan 20 19:31:29 2016 +0100
+
+    etc/vpn-firewall.d/30_default -> etc/vpn-firewall.d/30_default.conf
+
+commit 5d0c2a1bac3e90d4fb3bbedfe34e6adf4d4b6def
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Jan 20 19:30:59 2016 +0100
+
+    source only configuration files ending with .conf
+
+commit 619cbc3d97da1ef8b89d8d1b7fced3087585a27f
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:59:32 2015 +0000
+
+    comment
+
+commit c4f9fc1eb7efcf1dcb9c8b2592247a17398a398e
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:48:47 2015 +0000
+
+    added man page
+
+commit 644d69af42dd9fd114e29d53d04495cb23dcf1f2
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:46:03 2015 +0000
+
+    update
+
+commit 4a6921ca34d1c3f5cf151cd4f391e882386e14cf
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:45:22 2015 +0000
+
+    renamed:    etc/vpn_firewall.d/30_default -> etc/vpn-firewall.d/30_default
+
+commit f51763f36baba7ce935bc84fffe263f0b75e84bc
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:44:13 2015 +0000
+
+    renamed:    usr/bin/vpnfirewall -> usr/bin/vpn-firewall
+
+commit 044e193c9c7cc03fbab854963e95e49a5c6349aa
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:42:30 2015 +0000
+
+    init script: provide itself to fix lintian warning
+
+commit 98b3b7ed88622f9411dbb47f425eab251c5750ef
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:41:00 2015 +0000
+
+    fixed lintian warning in machine readable copyright file
+
+commit f36bedc0caad0ab7c89046ac70e37cc630c6a1ee
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:39:14 2015 +0000
+
+    fixed debian/changelog
+
+commit c27d7bdfbff37ccb32fd048b0a6e84c22317ea4f
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:35:00 2015 +0000
+
+    updated debian/rules
+
+commit 215f5223fe3609052772fccfbe77c08eeccb38f4
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:34:25 2015 +0000
+
+    added upstream changelog
+
+commit bdab55e8d273d62d3f63569fc0487916f26c3432
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 9 13:34:04 2015 +0000
+
+    updated makefile
+
+commit a3a16c712c3d6e3d0216f757ce47fbefe182dce7
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue May 20 13:30:08 2014 +0000
+
+    added extended package description
+
+commit cda4d0a682cba41406f5f4f569feccccc69e886f
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue May 20 13:28:00 2014 +0000
+
+    fix
+
+commit 5f6bee92f4a4e3a9acf671e328584a71495fd6bb
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue May 20 13:26:56 2014 +0000
+
+    fix lintian warning
+
+commit 80c0216eb53ae9d18d1f8b657fde6fca41343539
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue May 20 13:25:55 2014 +0000
+
+    work on debian packaging
+
+commit 7feb85d25c5a52e987f1c3a81af7ee0c601c8489
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue May 20 13:21:27 2014 +0000
+
+    work on debian packaging
+
+commit cae7e6249776679de65b7a87b6bbeeab66ed4fe6
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue May 20 13:19:48 2014 +0000
+
+    work on debian packaging
+
+commit f9900eb7d9a9e5c9acb22f5235306b6d3f319b4d
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue May 20 13:12:06 2014 +0000
+
+    Editing the script itself is no longer necessary. Moved settings from /usr/bin/vpnfirewall to configuration folder /etc/vpn_firewall.d/.
+
+commit c2a6fb1af96347a7fa2dff2f6fe9d237fbb85430
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue May 20 13:09:14 2014 +0000
+
+    removed trailing spaces
+
+commit 4e002c261b0212cc51bfb8182a66aa3dfdd825d1
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue May 20 13:08:26 2014 +0000
+
+    clarified Whonix-Workstation compatibility and Whonix-Gateway incompatibility
+
+commit e345e43ed364ae1e93be837105b1886b4b8c56ef
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Apr 13 04:16:56 2014 +0200
+
+    Update README.md
+
+commit a86d16f387092a099122b37cd6a752a21e533739
+Merge: b971afd e9ddef8
+Author: adrelanos <adrelanos@riseup.net>
+Date:   Mon Dec 2 14:26:54 2013 -0800
+
+    Merge pull request #3 from dburr/master
+    
+    Allow for multiple VPN server IP addresses
+
+commit e9ddef8d8a418364bcdf4e1e97d1f7d69234a8b7
+Author: Donald Burr <dburr@borg-cube.com>
+Date:   Tue Nov 26 15:38:07 2013 -0800
+
+    Allow for multiple VPN server IP addresses
+
+commit b971afd06e3a9bca98f8930b0ce1c4d4930a8293
+Author: adrelanos <adrelanos at riseup dot net>
+Date:   Tue Aug 6 21:13:48 2013 +0000
+
+    /etc/init.d/vpnfirewall: fixed path to DAEMON after removing /local/ from the path. Thanks to @fortasse for reporting this bug in #2.
+
+commit 8370bc9132b5dc5d30a1dae8dd01a0b5dd9b69d6
+Author: adrelanos <adrelanos at riseup dot net>
+Date:   Fri Jun 7 15:05:59 2013 +0000
+
+    README.md: recommend using IP instead of hostname for IP; uninstall before using a new version
+
+commit 39f83e9a3ade62433428681646f0f5f2745db859
+Author: adrelanos <adrelanos at riseup dot net>
+Date:   Thu Jun 6 21:45:44 2013 +0000
+
+    Added: it doesn't prevent leaks caused by bugs in the VPN software.
+
+commit 8b1c21cc9404a4eba95b18d1b21f05b3d20567ca
+Merge: 9126261 f467d89
+Author: adrelanos <adrelanos at riseup dot net>
+Date:   Thu Jun 6 21:29:27 2013 +0000
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 9126261d50583a9355b428e65c736462e08ab750
+Author: adrelanos <adrelanos at riseup dot net>
+Date:   Thu Jun 6 21:25:12 2013 +0000
+
+    moved usr/local/bin/vpnfirewall to usr/bin/vpnfirewall
+
+commit 92f29cf105460ecfed9a9782858505af33824429
+Author: adrelanos <adrelanos at riseup dot net>
+Date:   Thu Jun 6 21:21:00 2013 +0000
+
+    chmod +x /etc/init.d/vpnfirewall
+
+commit f467d89a294e14617fbec3a7b28ff5ec6835a4ad
+Author: adrelanos <adrelanos at riseup dot net>
+Date:   Mon May 6 09:43:07 2013 +0000
+
+    ..
+
+commit 57c52e43cf0c5b608f936823efec765045df1364
+Author: adrelanos <adrelanos at riseup dot net>
+Date:   Mon May 6 08:20:15 2013 +0000
+
+    debian packaging
+
+commit dde4e416f13a939bfae3d806709f1a7374ce8988
+Author: adrelanos <adrelanos at riseup dot net>
+Date:   Mon May 6 08:12:47 2013 +0000
+
+    debian packaging
+
+commit 40facc16e18dcada0a69228d31cbfb1a6276a343
+Author: adrelanos <adrelanos@riseup.net>
+Date:   Tue Apr 30 02:45:37 2013 +0000
+
+    Update README.md
+
+commit 41acd54e997692a31df23c59e49c595c940925c0
+Author: adrelanos <adrelanos@riseup.net>
+Date:   Mon Apr 29 22:13:48 2013 +0000
+
+    Update README.md
+
+commit 18108184f046ec57045be7c2b4d71c3c2130e983
+Author: adrelanos <adrelanos@riseup.net>
+Date:   Mon Apr 29 22:11:04 2013 +0000
+
+    Update README.md
+
+commit 7e8298ed998bb1b3ae422a9f0bdec3655035dc42
+Author: adrelanos <adrelanos@riseup.net>
+Date:   Mon Apr 29 22:08:29 2013 +0000
+
+    Update README.md
+
+commit 6d435fb9f8a77f2bf84a0127b7382f9af23652c2
+Author: adrelanos <adrelanos at riseup dot net>
+Date:   Mon Apr 29 22:02:54 2013 +0000
+
+    initial commit of init script
+
+commit 92d0d40dfe841216e6193abad9e5481492e5f415
+Author: adrelanos <adrelanos@riseup.net>
+Date:   Mon Apr 29 22:00:40 2013 +0000
+
+    Update README.md
+
+commit a3ac45674fc284f9d095b24eacb613adff28030a
+Author: adrelanos <adrelanos@riseup.net>
+Date:   Mon Apr 29 21:23:51 2013 +0000
+
+    Update README.md
+
+commit b67d839728aaea0ce02854246e6d1b0470fe2bbe
+Author: adrelanos <adrelanos@riseup.net>
+Date:   Mon Apr 29 21:18:35 2013 +0000
+
+    Update README.md
+
+commit a06ba4c0a5ab36fac6bee729c28bc0b6c4cccac2
+Author: adrelanos <adrelanos@riseup.net>
+Date:   Mon Apr 29 21:10:29 2013 +0000
+
+    Update README.md
+
+commit 798dc38e5e02503fa066ad7da00e88ada52c149a
+Author: adrelanos <adrelanos at riseup dot net>
+Date:   Mon Apr 29 21:03:13 2013 +0000
+
+    initial commit of firewall script
+
+commit 5a0b68d3f39b93d60e36ee23e6b083fab022d403
+Author: adrelanos <adrelanos@riseup.net>
+Date:   Mon Apr 29 20:54:46 2013 +0000
+
+    Update README.md
+
+commit 9da659061268948dde0987d250d79ace968ed4d8
+Author: adrelanos <adrelanos@riseup.net>
+Date:   Mon Apr 29 13:32:47 2013 -0700
+
+    Initial commit

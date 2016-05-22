@@ -5,137 +5,39 @@ It's much safer when it fails closed, i.e. when the VPN connection breaks down, 
 
 # What does it do
 
-* Forbid outgoing traffic after the VPN software broke down for some reason.
+* Forbid outgoing traffic after the VPN / tunnel software broke down for some reason.
 * Tight firewall rules, using iptables policy drop.
-* Only tested with OpenVPN. Should work with other VPN clients such as PPTP in theory, you should test if it does what it claims anyway.
-* Only tested on Debian Wheezy. Should work in many Linux distribution in theory, you should test if it does what it claims.
+* Defeat [shared VPN/Tor server leak bug](https://github.com/adrelanos/vpn-firewall/issues/12).
+* Only tested with OpenVPN. Should work with other VPN and tunnel clients such as PPTP in theory, you should test if it does what it claims anyway.
+* Only tested on Debian Jessie and Qubes. Should work in many Linux distribution supporting netfilter-persistent in theory.
+* You should test if it does what it claims.
 * Open Source / Free Software
 
 # What does it NOT do
 
 * Care about DNS leaks. Consult your VPN software's/provider's documentation and
 configure /etc/resolv.conf to use the DNS server of your VPN server.
+* Block WebRTC leaks.
 * Defend against
 [IP leaks](https://blog.torproject.org/blog/bittorrent-over-tor-isnt-good-idea).
 If a locally installed application uses trickery to obtain the the users real
-IP and sends it somewhere though the VPN.
+IP and sends it somewhere though the VPN. [This probably does not apply to VMs / computers when using the forwarding feature.)
 * Defend against adversaries, which are in position to run code locally, i.e.
 manipulate the firewall rules.
 * Prevent any other kind trickery to circumvent using the VPN.
 * Prevent leaks caused by bugs in the VPN software.
-* Run the VPN software as unprivileged user. For OpenVPN see
-[OpenVPN wiki UnprivilegedUser](https://community.openvpn.net/openvpn/wiki/
-UnprivilegedUser).
+* Be compatible with Whonix-Gateway/Workstation. (VPN-Firewall is incompatible with Whonix-Gateway/Workstation's firewall! Use Whonix documentation and use their built-in features.)
 * Manage IPv6 traffic. IPv6 traffic is blocked.
 * Install (Open)VPN.
 * Configure (Open)VPN.
 * Autostart (Open)VPN.
 * Anything else not mentioned above in "What does it do".
-* Untested to work in Qubes ProxyVMs. (They have a different way to up networking and firewall.)
 
 # How to Use
-1) First learn how to get your VPN software connected without using VPN-Firewall.
 
-Use the IP to connect to your VPN server, not the hostname!
+See:
 
-2) Remove old versions of VPN-Firewall.
-
-    sudo update-rc.d vpnfirewall remove
-    sudo rm /usr/local/bin/vpnfirewall
-    sudo rm /usr/bin/vpnfirewall
-    sudo rm /etc/init.d/vpnfirewall
-
-3) Get the firewall script and install it.
-
-    cd ~
-
-    git clone https://github.com/adrelanos/VPN-Firewall.git
-
-    cd VPN-Firewall
-
-    sudo cp ./usr/bin/vpnfirewall /usr/bin/
-
-4) Edit the /usr/bin/vpnfirewall settings with your favorite editor.
-
-Note, that you must use the IP of your VPN server, not the hostname.
-
-5) Load /usr/bin/vpnfirewall before the network and before OpenVPN goes up.
-
-* If you are NOT permanently using (Open)VPN, i.e. if you only occasionally, manually connect to the VPN.
-
-Just run the following command before starting OpenVPN.
-
-    sudo /usr/bin/vpnfirewall
-
-Should reply:
-
-    OK: Loading VPN firewall...
-    OK: The firewall should not show any messages,
-    OK: besides output beginning with prefix OK:...
-    OK: VPN firewall loaded.
-
-* If you are permanently using (Open)VPN, i.e. always want to use the VPN.
-
-Install the init script.
-
-    sudo cp ./etc/init.d/vpnfirewall /etc/init.d/
-
-    sudo update-rc.d vpnfirewall defaults
-
-Test the init script.
-
-    sudo service vpnfirewall restart
-
-    sudo service vpnfirewall status
-
-    echo $?
-
-Should reply:
-
-    0
-
-Reboot.
-
-Check VPN Firewall status again.
-
-    sudo service vpnfirewall status
-
-Should reply:
-
-    0
-
-6) How to unload VPN Firewall?
-
-If you want to disable VPN Firewall, see:
-https://gist.github.com/adrelanos/10565852
-
-# How to Test
-
-1) Install.
-
-2) Test if it works. Check whatismyipaddress.com if you your external IP is from the VPN.
-
-3) Kill the VPN client.
-
-Example OpenVPN:
-
-    sudo killall openvpn
-
-4) Check if you can still connect to whatismyipaddress.com.
-
-If yes, bad, something is wrong.
-
-If no, good, you won't connect to any remote servers besides the VPN IP once the VPN client broke down.
-
-# How to Debug
-
-Developers only.
-
-Enable debugging. Uncomment "set -x" in all scripts.
-
-Check iptables logs.
-
-    tail -f /var/log/syslog
+https://www.whonix.org/wiki/VPN-Firewall#How_to_use_VPN-Firewall
 
 # Alternatives
 
