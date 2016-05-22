@@ -9,7 +9,8 @@ It's much safer when it fails closed, i.e. when the VPN connection breaks down, 
 * Tight firewall rules, using iptables policy drop.
 * Defeat [shared VPN/Tor server leak bug](https://github.com/adrelanos/vpn-firewall/issues/12).
 * Only tested with OpenVPN. Should work with other VPN and tunnel clients such as PPTP in theory, you should test if it does what it claims anyway.
-* Only tested on Debian Jessie. Should work in many Linux distribution supporting netfilter-persistent in theory, you should test if it does what it claims.
+* Only tested on Debian Jessie and Qubes. Should work in many Linux distribution supporting netfilter-persistent in theory.
+* You should test if it does what it claims.
 * Open Source / Free Software
 
 # What does it NOT do
@@ -20,7 +21,7 @@ configure /etc/resolv.conf to use the DNS server of your VPN server.
 * Defend against
 [IP leaks](https://blog.torproject.org/blog/bittorrent-over-tor-isnt-good-idea).
 If a locally installed application uses trickery to obtain the the users real
-IP and sends it somewhere though the VPN.
+IP and sends it somewhere though the VPN. [This probably does not apply to VMs / computers when using the forwarding feature.)
 * Defend against adversaries, which are in position to run code locally, i.e.
 manipulate the firewall rules.
 * Prevent any other kind trickery to circumvent using the VPN.
