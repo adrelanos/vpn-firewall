@@ -1,3 +1,98 @@
+commit e9050e5fd893ec1e301e7844c21a520280ca8598
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun May 22 02:21:09 2016 +0200
+
+    readme
+
+commit d66e4f918df8d500078ec95f98220f32155a8f16
+Merge: ccc7a77 6393273
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun May 22 02:05:45 2016 +0200
+
+    Merge branch 'development'
+    
+    Conflicts:
+    	README.md
+
+commit 639327397ba1367d4baed253b5899ade9a8872d7
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun May 22 02:04:23 2016 +0200
+
+    readme
+
+commit dc6b335b380bf36b5ee9d62ca04917564a53f6e4
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun May 22 02:00:12 2016 +0200
+
+    readme
+
+commit a85e272a9b1cfa3507ccd9e8e8dc3808886667c4
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun May 22 01:19:28 2016 +0200
+
+    Qubes ProxyVM support
+    
+    fixed error handling
+    
+    https://github.com/adrelanos/vpn-firewall/issues/14
+
+commit 3ede5a41329ccf08de1788eb41b7005e4dc5d6cd
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat May 21 23:57:11 2016 +0200
+
+    work on Qubes ProxyVM support
+    
+    https://github.com/adrelanos/vpn-firewall/issues/14
+
+commit fcef3867b2b8f12f3b7d632c692ee0790786662e
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu May 19 21:28:00 2016 +0200
+
+    disable qubes-firewall and qubes-iptables systemd services
+    
+    to prevent them interfering with vpn-firewall
+
+commit af685888610a92099508dcff56559242d0772169
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu May 19 21:13:58 2016 +0200
+
+    added /etc/resolv.conf to Qubes protected files
+    
+    so Qubes does not reset VPN DNS server
+
+commit b1a77b8eb7fb28c2ad9ad394b5326673b9272398
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu May 19 20:53:51 2016 +0200
+
+    prevent running /usr/lib/qubes/qubes-setup-dnat-to-ns in vpn-firewall
+    
+    to stop it from modifying firewall rules
+    
+    https://phabricator.whonix.org/T502
+
+commit b2243b59e0c9f91da818c4357bddc22188140b23
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu May 12 00:53:12 2016 +0200
+
+    workaround for Qubes bug
+    /var/run/qubes-service qvm-sevice available too late breaks systemd services
+    https://github.com/QubesOS/qubes-issues/issues/1985
+
+commit f5a0d06e7f5b012b1016b2c5551d27d9f5058c60
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed May 11 23:52:26 2016 +0200
+
+    fixed shared VPN/Tor server leak bug (https://github.com/adrelanos/vpn-firewall/issues/12)
+    use ip(6)tables --wait
+    made ip(6)tables commands configurable
+    RELATED,ESTABLISHED -> ESTABLISHED for better security (fixes https://github.com/adrelanos/vpn-firewall/issues/9)
+    ported from sysvinit to (systemd) netfilter-persistent
+    also source configuration folder /rw/config/vpn-firewall.d/*.conf
+    Debian packaging
+    licensing
+    refactoring
+    comments
+
 commit 23f1a3046cd81ebcc714fe5c9e69e0ffa090f09c
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Tue Jan 26 19:46:36 2016 +0100
@@ -6,6 +101,12 @@ Date:   Tue Jan 26 19:46:36 2016 +0100
     
     Conflicts:
     	README.md
+
+commit ccc7a7726102893b933310aa28f662378e9260ca
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Jan 26 19:46:36 2016 +0100
+
+    updated readme
 
 commit 12a9a7baacb3cf6be456ae0c769ce382462db6c1
 Author: Patrick Schleizer <adrelanos@riseup.net>
@@ -138,6 +239,12 @@ Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Tue May 20 13:08:26 2014 +0000
 
     clarified Whonix-Workstation compatibility and Whonix-Gateway incompatibility
+
+commit 6147f0e606377f5a801e98daf22e24ba2c750a21
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed May 7 13:51:22 2014 +0200
+
+    how to unload
 
 commit e345e43ed364ae1e93be837105b1886b4b8c56ef
 Author: Patrick Schleizer <adrelanos@riseup.net>

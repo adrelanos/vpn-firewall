@@ -1,3 +1,9 @@
+vpn-firewall (3:1.0-1) unstable; urgency=medium
+
+  * New upstream version.
+
+ -- Patrick Schleizer <adrelanos@riseup.net>  Sun, 22 May 2016 02:27:16 +0200
+
 vpn-firewall (3:0.3-1) unstable; urgency=medium
 
   * New upstream version.
