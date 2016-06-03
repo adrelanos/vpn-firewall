@@ -5,3 +5,5 @@
 tunnel ALL=(ALL) NOPASSWD: /bin/ip
 tunnel ALL=(ALL) NOPASSWD: /usr/sbin/openvpn *
 Defaults:tunnel !requiretty
+Defaults:tunnel env_keep += script_type
+Defaults:tunnel env_keep += dev
