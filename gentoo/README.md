@@ -4,4 +4,3 @@ Gentoo in mind. The folder structure here
 is the expected folders they will run from
 out of root (/).
 
-Install script to come...
