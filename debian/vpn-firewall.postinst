@@ -1,0 +1,78 @@
+#!/bin/bash
+
+## This file is part of Whonix.
+## Copyright (C) 2012 - 2014 Patrick Schleizer <adrelanos@riseup.net>
+## See the file COPYING for copying conditions.
+
+if [ -f /usr/lib/pre.bsh ]; then
+   source /usr/lib/pre.bsh
+fi
+
+set -e
+
+true "
+#####################################################################
+## INFO: BEGIN: $DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME ${1+"$@"}
+#####################################################################
+"
+
+case "$1" in
+   configure)
+      true "INFO: Configuring $DPKG_MAINTSCRIPT_PACKAGE..."
+
+      user_account_list="tunnel"
+
+      for user_account in $user_account_list ; do
+         ret="0"
+         id "$user_account" || { ret="$?" ; true; };
+
+         if [ "$ret" = "0" ]; then
+            echo "INFO: Not creating user '$user_account', because it already exists."
+         else
+            echo "INFO: Creating user '$user_account'..."
+            if command -v qubesdb-read >/dev/null 2>&1 ; then
+               ## Qubes-Whonix
+               ## Qubes does by upstream default not use linux user account passwords.
+               password=""
+            else
+               ## Non-Qubes-Whonix
+               ## setting password of user $user_account to changeme
+               ##
+               ## How this password was created:
+               ## sudo apt-get install whois
+               ## mkpasswd
+               ## changeme
+               ## Resulted in: aTayYxVyw5kDo
+               password="aTayYxVyw5kDo"
+            fi
+            useradd --create-home --password "$password" --user-group --shell /bin/bash "$user_account"
+         fi
+      done
+
+      true "INFO: End configuring $DPKG_MAINTSCRIPT_PACKAGE."
+
+      ;;
+
+   *)
+      ;;
+esac
+
+if [ -d /run/systemd/system ] ; then
+   systemd-tmpfiles --create /usr/lib/tmpfiles.d/50_openvpn-unpriv.conf >/dev/null || true
+   systemctl --system daemon-reload >/dev/null || true
+fi
+
+true "INFO: debhelper beginning here."
+
+#DEBHELPER#
+
+true "INFO: Done with debhelper."
+
+true "
+#####################################################################
+## INFO: END  : $DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME ${1+"$@"}
+#####################################################################
+"
+
+## Explicitly "exit 0", so eventually trapped errors can be ignored.
+exit 0

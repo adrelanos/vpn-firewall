@@ -1,5 +1,23 @@
-vpnfirewall (0.1) UNRELEASED; urgency=low
+vpn-firewall (3:1.0-1) unstable; urgency=medium
 
-  * Initial release. (Closes: #000000)
+  * New upstream version.
 
- -- adrelanos <adrelanos@riseup.net>  Mon, 06 May 2013 07:38:09 +0000
+ -- Patrick Schleizer <adrelanos@riseup.net>  Sun, 22 May 2016 02:27:16 +0200
+
+vpn-firewall (3:0.3-1) unstable; urgency=medium
+
+  * New upstream version.
+
+ -- Patrick Schleizer <adrelanos@riseup.net>  Wed, 11 May 2016 17:39:42 +0200
+
+vpn-firewall (3:0.2-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Patrick Schleizer <adrelanos@riseup.net>  Sun, 17 Aug 2014 20:44:58 +0000
+
+vpn-firewall (3:0.1-2) unstable; urgency=low
+
+  * Initial release.
+
+ -- Patrick Schleizer <adrelanos@riseup.net>  Sun, 09 Mar 2014 14:47:45 +0000
