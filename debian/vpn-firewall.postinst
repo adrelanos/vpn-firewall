@@ -30,22 +30,7 @@ case "$1" in
             echo "INFO: Not creating user '$user_account', because it already exists."
          else
             echo "INFO: Creating user '$user_account'..."
-            if command -v qubesdb-read >/dev/null 2>&1 ; then
-               ## Qubes-Whonix
-               ## Qubes does by upstream default not use linux user account passwords.
-               password=""
-            else
-               ## Non-Qubes-Whonix
-               ## setting password of user $user_account to changeme
-               ##
-               ## How this password was created:
-               ## sudo apt-get install whois
-               ## mkpasswd
-               ## changeme
-               ## Resulted in: aTayYxVyw5kDo
-               password="aTayYxVyw5kDo"
-            fi
-            useradd --create-home --password "$password" --user-group --shell /bin/bash "$user_account"
+            useradd --home /etc/openvpn --user-group --shell /bin/false "$user_account"
          fi
       done
 
