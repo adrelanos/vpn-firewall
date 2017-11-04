@@ -53,6 +53,8 @@ https://www.whonix.org/wiki/VPN-Firewall#How_to_use_VPN-Firewall
 * Some individual VPN services distribute closed source applications with vendor lock in. Nice looking user interfaces.
 * One could tighten the firewall rules even more, by creating a dedicated user account for (Open)VPN, allow only the (Open)VPN process to connect to the VPN server. (VPN-Firewall lets all processes connect to the VPN IP, not only (Open)VPN. However, the setup would become more difficult, it may require modifying the OpenVPN init script.)
 * Much safer would be, if one would build something similar to [Whonix](https://github.com/adrelanos/Whonix). Very briefly, while Whonix uses Tor and consists of a Gateway and a Workstation, since the Workstation doesn't know it's own external IP, the Workstation can never leak it and never connect in the clear. One could create similarly a VPNBOX.
+* [Windows Firewall](https://zorrovpn.com/articles/windows-firewall-vpn-only). Windows only.
+* [IP Security Policies](https://superuser.com/questions/268902/how-to-block-all-traffic-but-one-ip-in-windows-firewall). Windows only.
 
 # Forks, Patches, Testers, Comments, etc.
 
