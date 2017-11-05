@@ -663,7 +663,8 @@ make_deb-clean() {
          "debian/files" \
          "debian/$package.prerm.debhelper" \
          "debian/$package.postinst.debhelper" \
-         "debian/$package.postrm.debhelper"
+         "debian/$package.postrm.debhelper" \
+         "debian/debhelper-build-stamp"
       do
          if [ -e "$to_delete" ]; then
             rm "$to_delete"
