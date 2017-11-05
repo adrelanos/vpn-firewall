@@ -185,6 +185,10 @@ DNS for VPN-Workstations will not work unless it gets manually configured to poi
    ## IPv4 OUTPUT
    ###########################
 
+   ## Access to localhost is required,
+   ## otherwise breaks applications such as konsole and kwrite.
+   $iptables_cmd -A OUTPUT -o lo -j ACCEPT
+
    ## XXX
    $iptables_cmd -A OUTPUT -o "$VPN_INTERFACE" -j ACCEPT
 
@@ -220,10 +224,8 @@ DNS for VPN-Workstations will not work unless it gets manually configured to poi
    $ip6tables_cmd -t mangle -F
    $ip6tables_cmd -t mangle -X
 
-   ## Allow unlimited access on loopback.
-   ## Not activated, since we do not need it.
-   #$ip6tables_cmd -A INPUT -i lo -j ACCEPT
-   #$ip6tables_cmd -A OUTPUT -o lo -j ACCEPT
+   $ip6tables_cmd -A INPUT -i lo -j ACCEPT
+   $ip6tables_cmd -A OUTPUT -o lo -j ACCEPT
 
    ## Log.
    #$ip6tables_cmd -A INPUT -j LOG --log-prefix "VPN firewall blocked input6: "
