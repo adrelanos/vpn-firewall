@@ -46,7 +46,7 @@ defaults() {
    [ -n "$iptables_cmd" ] || iptables_cmd="iptables --wait"
    [ -n "$ip6tables_cmd" ] || ip6tables_cmd="ip6tables --wait"
    [ -n "$VPN_INTERFACE" ] || VPN_INTERFACE="tun+"
-   [ -n "$LOCAL_NET" ] || LOCAL_NET="192.168.1.0/24 192.168.0.0/24 127.0.0.0/8"
+   [ -n "$LOCAL_NET" ] || LOCAL_NET="192.168.1.0/24 192.168.0.0/24"
    [ -n "$TUNNEL_USER" ] || TUNNEL_USER="$(id -u tunnel)"
    ## Internal interface
    if [ -d "/usr/lib/qubes" ]; then
