@@ -213,6 +213,8 @@ DNS for VPN-Workstations will not work unless it gets manually configured to poi
    ## IPv6
    ###########################
 
+   if ping -c 1 -W 1 ::1 > /dev/null 2> /dev/null; then
+
    ## Policy DROP for all traffic as fallback.
    $ip6tables_cmd -P INPUT DROP
    $ip6tables_cmd -P OUTPUT DROP
@@ -239,6 +241,10 @@ DNS for VPN-Workstations will not work unless it gets manually configured to poi
    ## --reject-with icmp-admin-prohibited not supported by $ip6tables_cmd
    $ip6tables_cmd -A FORWARD -j REJECT
 
+   else
+        echo "OK: IPv6 suppot not avalaible on system"
+   fi
+ 
    ###########################
    ## End
    ###########################
