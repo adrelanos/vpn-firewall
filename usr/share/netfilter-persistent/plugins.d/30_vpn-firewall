@@ -119,7 +119,10 @@ start() {
 
    ## Traffic on the loopback interface is accepted.
    $iptables_cmd -A INPUT -i lo -j ACCEPT
-
+   
+   ## Drop traffic to localhost that does not originate from lo
+   $iptables_cmd -A INPUT ! -i lo -s 127.0.0.0/8 -j DROP
+   
    ## Established incoming connections are accepted.
    $iptables_cmd -A INPUT -m state --state ESTABLISHED -j ACCEPT
 
