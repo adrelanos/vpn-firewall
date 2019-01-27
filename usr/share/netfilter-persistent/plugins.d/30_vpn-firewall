@@ -46,7 +46,7 @@ defaults() {
    [ -n "$iptables_cmd" ] || iptables_cmd="iptables --wait"
    [ -n "$ip6tables_cmd" ] || ip6tables_cmd="ip6tables --wait"
    [ -n "$VPN_INTERFACE" ] || VPN_INTERFACE="tun+"
-   [ -n "$LOCAL_NET" ] || LOCAL_NET="192.168.1.0/24 192.168.0.0/24 127.0.0.0/8"
+   [ -n "$LOCAL_NET" ] || LOCAL_NET="192.168.1.0/24 192.168.0.0/24"
    [ -n "$TUNNEL_USER" ] || TUNNEL_USER="$(id -u tunnel)"
    ## Internal interface
    if [ -d "/usr/lib/qubes" ]; then
@@ -185,6 +185,10 @@ DNS for VPN-Workstations will not work unless it gets manually configured to poi
    ## IPv4 OUTPUT
    ###########################
 
+   ## Access to localhost is required,
+   ## otherwise breaks applications such as konsole and kwrite.
+   $iptables_cmd -A OUTPUT -o lo -j ACCEPT
+
    ## XXX
    $iptables_cmd -A OUTPUT -o "$VPN_INTERFACE" -j ACCEPT
 
@@ -209,6 +213,8 @@ DNS for VPN-Workstations will not work unless it gets manually configured to poi
    ## IPv6
    ###########################
 
+   if ping -c 1 -W 1 ::1 > /dev/null 2> /dev/null; then
+
    ## Policy DROP for all traffic as fallback.
    $ip6tables_cmd -P INPUT DROP
    $ip6tables_cmd -P OUTPUT DROP
@@ -220,10 +226,8 @@ DNS for VPN-Workstations will not work unless it gets manually configured to poi
    $ip6tables_cmd -t mangle -F
    $ip6tables_cmd -t mangle -X
 
-   ## Allow unlimited access on loopback.
-   ## Not activated, since we do not need it.
-   #$ip6tables_cmd -A INPUT -i lo -j ACCEPT
-   #$ip6tables_cmd -A OUTPUT -o lo -j ACCEPT
+   $ip6tables_cmd -A INPUT -i lo -j ACCEPT
+   $ip6tables_cmd -A OUTPUT -o lo -j ACCEPT
 
    ## Log.
    #$ip6tables_cmd -A INPUT -j LOG --log-prefix "VPN firewall blocked input6: "
@@ -237,6 +241,10 @@ DNS for VPN-Workstations will not work unless it gets manually configured to poi
    ## --reject-with icmp-admin-prohibited not supported by $ip6tables_cmd
    $ip6tables_cmd -A FORWARD -j REJECT
 
+   else
+        echo "OK: IPv6 suppot not avalaible on system"
+   fi
+ 
    ###########################
    ## End
    ###########################
